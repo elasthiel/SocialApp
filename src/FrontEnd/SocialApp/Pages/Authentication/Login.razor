@@ -1,0 +1,35 @@
+﻿@page "/login"
+
+<PageTitle>Login</PageTitle>
+
+<div class="container">
+    <div class="">
+        <h1>Login</h1>
+        <EditForm FormName="LoginForm" Model="Input" OnValidSubmit="@(() => Console.WriteLine("HELLO WORLD"))">
+            <DataAnnotationsValidator />
+        </EditForm>
+
+        <hr />
+    </div>
+</div>
+
+@code
+{
+
+    private UserModel Input { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Input ??= new UserModel();
+    }
+
+    public class UserModel
+    {
+        [EmailAddress]
+        public string EmailAddress { get; set; } = string.Empty;
+
+        [Required]
+        public string Password { get; set; } = string.Empty;
+    }
+}
